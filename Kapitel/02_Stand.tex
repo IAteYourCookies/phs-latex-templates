@@ -11,11 +11,17 @@ In diesem Kapitel wird besonders intensiv mit der Literatur gearbeitet. Entsprec
 
 Dabei beachte ich die Vorgaben der Provadis School of International Management and Technology, die in den „Anforderungen an wissenschaftliche Hausarbeiten“ beschrieben sind.
 
-Die Literatur wird in einem Verzeichnis am Ende der Arbeit aufgeführt.
-Ebenso werden Quellen (Interviews, Internetseiten) in einem gesonderten Quellenverzeichnis genannt.
+Die Literatur wird im Literaturverzeichnis am Ende der Arbeit aufgeführt. Es enthält alle verwendeten Quellen -- und nur diese --, auch Internetquellen (mit Webadresse in eckigen Klammern und Datum des letzten Zugriffs).
 
-Literaturquellen werden in der Datei Referenzen.bib im BibTeX-Format eingetragen und im Text~\cite{lustigeCitation} zitiert.
-\todo[inline]{Gemäß des Anforderungsdokuments muss auch die genaue Seite der Quelle benannt werden.}
+Literaturquellen werden in der Datei Referenzen.bib im BibTeX-Format eingetragen und zitiert. Die Seitenangabe ist obligatorisch.
+\ifharvard
+    Ein wörtliches Zitat steht in Anführungszeichen: \enquote{Kaffee ist die einzige Substanz, die uns schneller arbeiten lässt}\footcite[12]{lustigeCitation}. Eine Paraphrase steht ohne Anführungszeichen, die Fußnote wird mit \enquote{Vgl.} eingeleitet\footcite[Vgl.][8\psq]{mustermann2020}. Auch Internetquellen werden so belegt\footcite[Vgl.][]{provadisWeb}.
+\else
+    Ein wörtliches Zitat steht in Anführungszeichen: \enquote{Kaffee ist die einzige Substanz, die uns schneller arbeiten lässt}~\cite[12]{lustigeCitation}. Paraphrasen stehen ohne Anführungszeichen~\cite[8\psq]{mustermann2020}.
+\fi
+
+Wörtlich übernommene Stellen aus KI-Quellen stehen in Asterisken: \kizitat{Ein gutes Recruiting beginnt mit einer klaren Stellenbeschreibung.}{ChatGPT 1} Wurde KI-Output nur als Ausgangspunkt verwendet, lautet die Fußnote \enquote{Vgl. Elicit 1.}\kivgl{Elicit 1}
+
 Gut gepflegte BibTeX-Einträge finden sich etwa in der DBLP\footnote{\url{https://dblp.uni-trier.de}} und in den Online-Bibliotheken großer Wissenschaftsverlage, wie der ACM Digital Library\footnote{\url{https://dl.acm.org}}, IEEE Xplore\footnote{\url{https://ieeexplore.ieee.org}}, Springer Link\footnote{\url{https://link.springer.com}}, Elsevier ScienceDirect\footnote{\url{https://www.elsevier.com/de-de/products/sciencedirect}}, uvw.
 \todo[inline]{Quellenverweise sollten immer \emph{direkt} hinter Nennung der Quelle bzw. der zu unterstützenden Aussage stehen, und nicht am Ende des Satzes oder gar des Absatzes.}
 

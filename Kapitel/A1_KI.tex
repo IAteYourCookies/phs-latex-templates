@@ -2,6 +2,8 @@
 %
 % A1_KI.tex
 %
+% Das KI-Verzeichnis ist verpflichtend. Ob KI verwendet wurde, wird in
+% Berichtinfos.tex über \KIverwendettrue / \KIverwendetfalse eingestellt.
 
 \addchap{KI-Verzeichnis}
 
@@ -9,25 +11,25 @@
 Jede Nutzung von KI ist zu dokumentieren. Dazu wird hinter dem Literaturverzeichnis ein separates KI-Verzeichnis eingefügt, das alle KI-generierten Inhalte, die eingesetzten Systeme, die verwendeten \emph{Prompts} sowie die weitere Verwendung des Outputs der KI transparent macht.\\
 Bei der mehrfachen Verwendung eines Systems werden die Einträge durchnummeriert.\\
 Die Reihenfolge der Einträge entspricht der Reihenfolge der Verwendung im Text.\\
-Das KI-Verzeichnis ist \textbf{verpflichtend}.}
+In der Spalte \enquote{Prompt} ist der Ausgangsprompt aufzunehmen.\\
+Das KI-Verzeichnis ist \textbf{verpflichtend}. Sofern keine KI verwendet wurde, enthält das Verzeichnis nur den Eintrag \enquote{Es wurde keine KI verwendet.} (\texttt{\textbackslash KIverwendetfalse} in Berichtinfos.tex).}
 
-
-\begin{table*}[h]
-    \renewcommand{\arraystretch}{2}
-    \centering
-    \begin{tabular}{p{0.15\textwidth} p{0.5\textwidth} p{0.25\textwidth}}
+ifKIverwendet
+    % longtable statt Gleitumgebung: bleibt direkt unter der Überschrift und
+    % darf über mehrere Seiten umbrechen
+    {\renewcommand{\arraystretch}{1.5}
+    \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.15\textwidth} >{\raggedright\arraybackslash}p{0.5\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
         \toprule
-        \large System&\large Prompt&\large Verwendung\\
+        \textbf{System} & \textbf{Prompt} & \textbf{Verwendung (ggf. Beschreibung)}\\
         \midrule
+        \endhead
+        \bottomrule
+        \endfoot
         ChatGPT 1 & What criteria should I use to select a leader? & weiterentwickelt \\
         ChatGPT 2 & Schreibe einen Text, in dem die folgenden Themen behandelt werden: Personalmarketing und seine Bedeutung für ein Unternehmen – der Zusammenhang zum Employer Branding – die Auswirkungen der Personalmarketingstrategie auf das Recruiting.  & verändert: Passagen ausgelassen  \\
         ChatGPT 3 & Entwurf einer Gliederung für eine Hausarbeit zum Thema Recruiting  & unverändert \\
-        Elicit 1& Which elements should be included in an Employer Branding Plan?  & Passagen überarbeitet  \\
-        \bottomrule
-    \end{tabular}
-\end{table*}
-
-Sofern keine KI verwendet wurde, enthält das Verzeichnis nur den Eintrag:
-\begin{verse}
+        Elicit 1 & Which elements should be included in an Employer Branding Plan?  & Passagen überarbeitet  \\
+    \end{longtable}}
+\else
     Es wurde keine KI verwendet.
-\end{verse}
+\fi

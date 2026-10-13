@@ -14,6 +14,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% T1-Schriftkodierung: nötig, damit Wörter mit Umlauten korrekt getrennt werden
+% und der Text im PDF durchsuch-/kopierbar ist (u.a. für die Plagiatsprüfung)
+\usepackage[T1]{fontenc}
 % Times New Roman Alternative, pdflatex-kompatibel
 \usepackage{newtxtext}
 
@@ -28,14 +31,39 @@
 \usepackage{titling}
 %Hilft im Dokument auf den deklarierten Autor und Titel zuzugreifen
 
-\usepackage[style=numeric-comp,backend=biber,doi=false,isbn=false,maxnames=3,sorting=none]{biblatex}
 \usepackage{csquotes}
+% Zitierweise wird in Berichtinfos.tex über \harvardtrue / \harvardfalse gewählt.
+% Anforderung: einheitlicher Stil, Seitenangabe obligatorisch; Online-PDFs mit URL oder DOI
+% (daher doi=true).
+\ifharvard
+    % Kurzzitierweise nach Harvard in Fußnoten, wie im Anforderungsdokument empfohlen:
+    %   Fußnote:              siehe Weber (2020): S. 8.
+    %   Literaturverzeichnis: Weber, Max (2020): Titel. Ort: Verlag.
+    %   Sortierung:           alphabetisch nach Verfasser, dann Jahr, dann Titel (nyt)
+    % Verwendung im Text:     \footcite[Vgl.][8]{schluessel}   bzw. \footcite[8\psq]{schluessel} (=S. 8 f.)
+    \usepackage[style=authoryear,backend=biber,sorting=nyt,doi=true,isbn=false,
+        maxcitenames=2,maxbibnames=3,dashed=false,uniquename=false,uniquelist=false]{biblatex}
+    \DeclareDelimFormat{nameyeardelim}{\addspace}
+    \DeclareDelimFormat{postnotedelim}{\addcolon\space}
+    \DeclareDelimFormat[bib]{nameyeardelim}{\addspace}
+    \DeclareDelimFormat[bib]{labelnamepunct}{\addcolon\space}
+    \renewbibmacro*{cite:labeldate+extradate}{%
+        \iffieldundef{labelyear}{}%
+            {\printtext[bibhyperref]{\printtext[parens]{\printlabeldateextra}}}}
+\else
+    % Numerische Zitierweise (IEEE-ähnlich), Seitenangabe trotzdem Pflicht: \cite[8]{schluessel}
+    \usepackage[style=numeric-comp,backend=biber,doi=true,isbn=false,maxnames=3,sorting=none]{biblatex}
+\fi
+% Internetquellen: Webadresse in eckigen Klammern plus Datum des letzten Zugriffs
+\DeclareFieldFormat{url}{\mkbibbrackets{\url{#1}}}
+\DefineBibliographyStrings{ngerman}{urlseen = {Zugriff am}}
 \addbibresource{Referenzen.bib}
 %Regelt die Erstellung des Literaturverzeichnisses sowie die Zitation im gesamten Bericht
 %Greift gleichzeitig auf die Referenzen.bib genannte BibTex datei zu, in welcher die Quellen aufgeführt sind.
 
 \usepackage{url}
-%erzeugt schönere URLs (vorallem in den Quellen wichtig)
+\urlstyle{same}
+%erzeugt schönere URLs (vorallem in den Quellen wichtig), in der Textschrift statt Schreibmaschinenschrift
 
 \usepackage{float}
 %Hilft beim Anordnen von Bildern, Grafiken und Tabellen
@@ -46,6 +74,10 @@
 \usepackage{booktabs}
 %ermöglicht das erstellen von schöneren Tabellen
 
+\usepackage{array}
+\usepackage{longtable}
+%Tabellen, die über mehrere Seiten umbrechen dürfen (z.B. KI-Verzeichnis)
+
 \usepackage{subfigure}
 %lässt den Benutzer mehrere Grafiken/Bilder in einer Abbildung darstellen
 
@@ -53,6 +85,9 @@
 % Paket um den Zeilenabstand zu ändern
 \onehalfspacing
 % Zeilenabstand auf 1,5-fach setzen
+% Zeilenabstand 1,5 Zeilen für den Fließtext (Anforderung).
+% Hinweis: \onehalfspacing = 1,5 x Schriftgröße (18 pt bei 12 pt). Wer exakt Words
+% "1,5 Zeilen" bei Times New Roman 12 (ca. 20,7 pt) nachbilden will: \setstretch{1.43}
 
 \usepackage{pdfpages}
 %ermöglicht das einbinden von eigenständigen PDF Dokumenten
@@ -78,8 +113,6 @@
 \usepackage{graphicx}
 %mehr Optionen beim Einbinden und anordnen von Bildern und Grafiken
 
-\usepackage{setspace}
-%Für den richtigen Zeilenabstand
 %%% HJP 31/3/25
 \newlength\dist
 \setlength\dist{-\topskip}
@@ -89,9 +122,9 @@
 \def\resetchapspace{\let\chapterheadstartvskip\chapback}
 %%%
 
-\usepackage[left=3cm,right=2cm,top=3cm, bottom=3cm]{geometry}
-%Regelt die Seitenabstände
-%Muss ggf. bei beidseitigem Layout angepasst werden.
+\usepackage[left=3cm,right=2cm,top=3cm,bottom=2cm,footskip=1cm]{geometry}
+%Regelt die Seitenabstände gemäß Anforderung: links und oben je 3 cm, rechts und unten je 2 cm
+%(setzt einseitiges Layout voraus, siehe Option oneside in main.tex)
 
 \usepackage{enumitem}
 
@@ -132,7 +165,6 @@
 \setuptodonotes{fancyline}
 \todototoc
 
-\linespread{1.5}
 \flushbottom
 
 \iffalse % don’t use titlesec.sty with KOMA script classes
@@ -153,13 +185,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREFACE AND BODY STYLING
 \def\preface{
     \pagenumbering{roman}
-    \doublespacing
 }
 
 \def\body{
     %\cleardoublepage
     \lesschapspace
-    \linespread{1.5}
     \pagenumbering{arabic}
     \pagestyle{headings}
 }
@@ -170,8 +200,7 @@
     \end{center}
     \normalsize
     \normalfont
-    \linespread{1.5}
-    }{\cleardoublepage}
+}
 \def\endabstract{
   \par
 }
@@ -182,7 +211,6 @@
         \large \bf Danksagung}
     \end{center}
     \normalsize
-    \linespread{1.5}
     }{\cleardoublepage}
 \def\endacknowledgements{
   \par

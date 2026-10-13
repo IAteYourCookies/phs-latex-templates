@@ -1,5 +1,5 @@
-% Vorlage fÃ¼r WABs der Provadis Hochschule
-% basiert auf "UniversitÃ¤t Ulm Praktikumsbericht Vorlage"
+% Vorlage für WABs der Provadis Hochschule
+% basiert auf "Universität Ulm Praktikumsbericht Vorlage"
 % von Max Sch.
 % CC BY 4.0
 %
@@ -14,25 +14,26 @@
 \documentclass[
 	a4paper,
 	ngerman,
-	12pt,	% 12pt fÃ¼r Times, 11pt fÃ¼r Arial und 10pt fÃ¼r Verdana
+	12pt,	% 12pt für Times, 11pt für Arial und 10pt für Verdana
 	bibliography=totoc,
 	listof=totoc,
 	numbers=noendperiod,
 	openany,
 	twoside,
+	%oneside, % Anforderung: links 3 cm, rechts 2 cm auf JEDER Seite (twoside spiegelt die Ränder)
 	headinclude=false,
 	titlepage=firstiscover,
 	abstract=true,
 	headsepline=true,
 	footsepline=true,
-	headings=big,
-	hyphenzone=1.25cm
+	headings=normal
 	]{scrreprt}
-%Startet das Dokument und regelt gleichzeitig Formatierungen wie SchriftgrÃ¶ÃŸe, Papierformat, Zahlenart, Sprache usw.
-% 12pt - die StandardschriftgrÃ¶ÃŸe
-% openany - Kapitel dÃ¼rfen auch auf der "RÃ¼ckseite" starten, Leerseiten werden vermieden
-% parskip=full - Leerzeilen zwischen AbsÃ¤tzen statt EinrÃ¼ckung
-% twoside - RÃ¼ckseiten werden mit bedruckt, Seitenzahlen und BinderÃ¤nde werden entsprechen angepasst; Alternative: oneside
+%Startet das Dokument und regelt gleichzeitig Formatierungen wie Schriftgröße, Papierformat, Zahlenart, Sprache usw.
+% 12pt - die Standardschriftgröße
+% openany - Kapitel dürfen auch auf der "Rückseite" starten, Leerseiten werden vermieden
+% parskip=full - Leerzeilen zwischen Absätzen statt Einrückung
+% twoside - Rückseiten werden mit bedruckt, Seitenzahlen und Binderände werden entsprechen angepasst
+% Alternative: oneside - einseitiges Layout, damit der linke Rand auf jeder Seite 3 cm beträgt
 
 % \RedeclareSectionCommand[
 %   beforeskip=-32pt
@@ -48,35 +49,48 @@
 
 \begin{document}
 
+% Deckblatt erhält eine eigene (unsichtbare) Nummerierung, damit es nicht mit
+% Seite 1 des Textteils kollidiert (doppelte PDF-Sprungmarke "page.1")
+\pagenumbering{Alph}
 \include{Kapitel/Titelseite}
 
 \preface
-%Ab hier Seitenzahlen mit RÃ¶mischen Ziffern
+%Ab hier Seitenzahlen mit Römischen Ziffern
 
 \listoftodos
 
-% auskommentieren, um den Sperrvermerk wegzulassen
-\include{Kapitel/Sperrvermerk}
+% Sperrvermerk NUR einkommentieren, wenn zwingend schützensnotwendige,
+% vertrauliche Informationen enthalten sind (siehe Kapitel/Sperrvermerk.tex)
+%\include{Kapitel/Sperrvermerk}
 
 % auskommentieren, um den Abstract/Kurzzusammenfassung wegzulassen
 \include{Kapitel/Abstract}
 
+% Reihenfolge der Verzeichnisse gemäß Anforderungen (Formatierung 2a):
+% Sperrvermerk, Inhalt, Abbildungen, Glossar, Tabellen, Abkürzungen, Symbole
+
 \tableofcontents
-%erstellt das vollautomatische Inhaltsverzeichnis
+% erstellt das vollautomatische Inhaltsverzeichnis
 
 \listoffigures
-%erstellt das Abbildungsverzeichnis
+% erstellt das Abbildungsverzeichnis (sofern notwendig)
 
 \listoftables
-%erstellt das Tabellenverzeichnis
+% erstellt das Tabellenverzeichnis (sofern notwendig)
 
 \glsaddall[types=main]
-%Befehl, um alle Glossar EintrÃ¤ge ohne sie im body aufzurufen, auszugeben
+% Befehl, um alle Glossar Einträge ohne sie im body aufzurufen, auszugeben
 \printglossary[title=Glossar, type=\glsdefaulttype]
-%erstellt das Glossar
+% erstellt das Glossar (sofern notwendig)
 
-\printglossary[type=\acronymtype, title=AbkÃ¼rzungsverzeichnis, nonumberlist]
-%erstellt das AbkÃ¼rzungsverzeichnis
+\printglossary[type=\acronymtype, title=Abürzungsverzeichnis, nonumberlist]
+% erstellt das Abkürzungsverzeichnis (sofern notwendig)
+
+% Symbolverzeichnis (sofern notwendig), z.B.:
+%\addchap{Symbolverzeichnis}
+%\begin{tabular}{@{}ll}
+%    $\alpha$ & Signifikanzniveau \\
+%\end{tabular}
 
 \newpage
 
@@ -91,14 +105,26 @@
 \include{Kapitel/06_Fazit.tex}
 
 \pagenumbering{Roman}
+% Seiten nach dem Textteil mit großen römischen Zahlen (I, II, III ...)
 
-\printbibliography
-%erstellt das Literaturverzeichnis
+% Reihenfolge gemäß Anforderungen (Formatierung 2b):
+% Literatur, KI-Verzeichnis, Rechtsquellen, Anhang, Selbstständigkeitserklärung
+
+\printbibliography[title=Literaturverzeichnis]
+% erstellt das Literaturverzeichnis (verpflichtend)
 
 \include{Kapitel/A1_KI}
-\include{Kapitel/A2_Erklaerung}
+% KI-Verzeichnis (verpflichtend)
 
+% Rechtsquellenverzeichnis (sofern notwendig), z.B.:
+%\addchap{Rechtsquellenverzeichnis}
+
+% Anhangsverzeichnis und Anhang (sofern notwendig), z.B.:
+%\addchap{Anhangsverzeichnis}
+%...
+
+\include{Kapitel/A2_Erklaerung}
+% Selbstständigkeitserklärung (verpflichtend)
 
 \end{document}
 %beendet das Dokument
-

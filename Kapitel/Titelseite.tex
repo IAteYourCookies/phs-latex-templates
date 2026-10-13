@@ -6,8 +6,10 @@
 % Titelseite.tex
 %
 % Hier wird die Titelseite erzeugt.
-
-
+% Pflichtangaben laut Anforderungen (Formatierung 1a-f): Art der Arbeit, Titel,
+% Fach (nur Praxisberichte), Name, Matrikelnummer, Studiengang mit Studiengruppe,
+% E-Mail, Telefon (optional), Abgabedatum, Referent:in (+ Korreferent:in bei BT/MT).
+% Alle Werte werden in Berichtinfos.tex gesetzt.
 \begin{titlepage}
 
     % Logo Provadis Hochschule und ggf. Logo Arbeitgeber
@@ -20,46 +22,54 @@
 
     \begin{singlespace}
         \begin{center}
-
-            \normalsize
-            Wiss. Kurzbericht / WAB / Bachelorarbeit / Masterarbeit
+            \large
+            \artderarbeit
 
             \vspace*{2cm}
 
-            \large
+            \Large
 
             \textbf{\titel}
 
-            \vspace*{3cm}
+            \vspace*{2.5cm}
 
             \normalsize
             Zur Veranstaltung / zur Erlangung des akademischen Grades\\
             ’Bachelor of Science’ B.Sc. / ’Master of Science’ M.Sc.\\
             im Studiengang ’XXX’
+            \ifdefempty{\fach}{}{%
+                im Fach \enquote{\fach}\\
+            }%
+            \ifdefempty{\abschluss}{}{%
+                zur Erlangung des akademischen Grades\\
+                \abschluss\\
+            }
 
-            \vspace*{2cm}
+            \vspace*{1.5cm}
 
-            vorgelegt dem Fachbereich \fakultaet \ der\\
+            vorgelegt dem Fachbereich \fakultaet\ der\\
             Provadis School of International Management and Technology\\
             von
 
             \vspace*{1cm}
 
             \fullname \\
-            \matnr \\
-            Studiengang mit Studiengruppe \\
-            \email \\
-            \telMobil
-
+            Matrikelnummer: \matnr \\
+            Studiengang: \studiengang, Studiengruppe: \studiengruppe \\
+            \email
+            \ifdefempty{\telMobil}{}{\\ \telMobil}
         \end{center}
     \end{singlespace}
 
     \normalsize
     \vfill % variabler vertikaler Abstand
+    \ifdefempty{\refSecond}%
+        {\def\korefzeile{}}%
+        {\def\korefzeile{Korreferent:in: & \refSecond \\[0.25cm]}}%
     \begin{tabular}{@{}ll}
-        Erstgutachter: & \refFirst \\[0.25cm]
-        Zweitgutachter: & \refSecond \\[0.25cm]
-        Ende der Bearbeitungsfrist: & \abgabedatum \\
+        Referent:in: & \refFirst \\[0.25cm]
+        \korefzeile
+        Abgabedatum: & \abgabedatum \\
     \end{tabular}
 
 \end{titlepage}

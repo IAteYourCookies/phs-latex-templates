@@ -7,10 +7,28 @@
 %
 % Hier werden individuelle Inforamtionen festgelegt.
 
+% Art der Arbeit (genau eine Zeile aktiv lassen)
+% Pflichtangabe Deckblatt, siehe Anforderungen "Formatierung 1a"
+\newcommand{\artderarbeit}{Wissenschaftlich angeleitete Berufspraxis}
+%\newcommand{\artderarbeit}{Wissenschaftlicher Kurzbericht}
+%\newcommand{\artderarbeit}{Bachelorarbeit}
+%\newcommand{\artderarbeit}{Masterarbeit}
+
+% Nur bei Praxisberichten (WAB / Kurzbericht): das Fach. Bei BT/MT leer lassen: {}
+\newcommand{\fach}{Name des Fachs / der Veranstaltung}
+
+% Nur bei BT/MT: angestrebter akademischer Grad. Bei Praxisberichten leer lassen: {}
+\newcommand{\abschluss}{}
+%\newcommand{\abschluss}{Bachelor of Science (B.Sc.)}
+%\newcommand{\abschluss}{Master of Science (M.Sc.)}
+
 %persönliche Daten
 \newcommand{\fullname}{First Last}
 \newcommand{\email}{first.last@stud-provadis-hochschule.de}
 \newcommand{\matnr}{XXXX}
+\newcommand{\studiengang}{Business Information Management}
+\newcommand{\studiengruppe}{BBIM26}
+% Telefonnummer ist optional. Zum Weglassen leer lassen: {}
 \newcommand{\telMobil}{+49 XXX XXXXXXX}
 \newcommand{\fakultaet}{Informatik und Wirtschaftsinformatik}
 
@@ -20,12 +38,32 @@ Titel und Untertitel der Arbeit}
 \newcommand{\unternehmen}{Musterfirma}
 
 \newcommand{\abgabedatum}{XX.XX.XXXX}
+\newcommand{\ort}{Frankfurt am Main}
+
+% Optional: Bild der digitalen Unterschrift für die Selbstständigkeitserklärung,
+% z.B. {Bilder/Unterschrift.png}. Bei Upload im HVS optional -> leer lassen: {}
+\newcommand{\unterschrift}{}
 
 % Daten zu Betreuern
+% Referent:in = betreuende Dozent:in
 \newcommand{\refFirst}{Prof. Dr. First Last}
+% Korreferent:in nur bei Bachelor- und Masterarbeiten, sonst leer lassen: {}
 \newcommand{\refSecond}{Prof. Dr. First Last}
 
+% Zitierweise: Kurzzitierweise nach Harvard in Fußnoten (typisch in der Wirtschaftsinformatik,
+% "siehe Weber (2020): S. 8.") oder numerisch (typisch in der Kerninformatik, IEEE-ähnlich,
+% "[1, S. 8]").
+\newif\ifharvard
+\harvardtrue
+%\harvardfalse
+
+% Wurde KI verwendet? Steuert den Inhalt des (verpflichtenden) KI-Verzeichnisses.
+\newif\ifKIverwendet
+\KIverwendettrue
+%\KIverwendetfalse
+
+
 %Deklariert den Namen des Authors, sowie den Namen der generierten pdf Datei
-\title{Wissenschaftlich angeleitet Berufspraxis - \unternehmen}
+\title{\artderarbeit\ -- \unternehmen}
 \author{\fullname}
-\date{\today}
+\date{\abgabedatum}
