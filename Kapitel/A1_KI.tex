@@ -14,7 +14,7 @@ Die Reihenfolge der Einträge entspricht der Reihenfolge der Verwendung im Text.
 In der Spalte \enquote{Prompt} ist der Ausgangsprompt aufzunehmen.\\
 Das KI-Verzeichnis ist \textbf{verpflichtend}. Sofern keine KI verwendet wurde, enthält das Verzeichnis nur den Eintrag \enquote{Es wurde keine KI verwendet.} (\texttt{\textbackslash KIverwendetfalse} in Berichtinfos.tex).}
 
-ifKIverwendet
+\ifKIverwendet
     % longtable statt Gleitumgebung: bleibt direkt unter der Überschrift und
     % darf über mehrere Seiten umbrechen
     {\renewcommand{\arraystretch}{1.5}

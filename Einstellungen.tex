@@ -218,3 +218,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ZITATE AUS KI-QUELLEN
+% Anforderung: Wörtliche KI-Zitate *in Asterisken* statt Anführungszeichen,
+% Fußnote verweist auf den Eintrag im KI-Verzeichnis (z.B. "ChatGPT 1.").
+% Paraphrasen / KI als Ausgangspunkt: Fußnote "Vgl. Elicit 1."
+% Übernahme von Strukturen: Fußnote an der Kapitelüberschrift.
+%   \kizitat{Text der KI}{ChatGPT 1}
+%   \kivgl{Elicit 1}
+\newcommand{\kizitat}[2]{*#1*\footnote{#2.}}
+\newcommand{\kivgl}[1]{\footnote{Vgl. #1.}}
