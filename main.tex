@@ -1,5 +1,5 @@
-% Vorlage für WABs der Provadis Hochschule
-% basiert auf "Universität Ulm Praktikumsbericht Vorlage"
+% Vorlage fï¿½r WABs der Provadis Hochschule
+% basiert auf "Universitï¿½t Ulm Praktikumsbericht Vorlage"
 % von Max Sch.
 % CC BY 4.0
 %
@@ -8,19 +8,19 @@
 % Das ist das zentrale Dokument.
 
 
-%persönliche Infos
+%persï¿½nliche Infos
 \input{Berichtinfos}
 
 \documentclass[
 	a4paper,
 	ngerman,
-	12pt,	% 12pt für Times, 11pt für Arial und 10pt für Verdana
+	12pt,	% 12pt fï¿½r Times, 11pt fï¿½r Arial und 10pt fï¿½r Verdana
 	bibliography=totoc,
 	listof=totoc,
 	numbers=noendperiod,
 	openany,
 	twoside,
-	%oneside, % Anforderung: links 3 cm, rechts 2 cm auf JEDER Seite (twoside spiegelt die Ränder)
+	%oneside, % Anforderung: links 3 cm, rechts 2 cm auf JEDER Seite (twoside spiegelt die Rï¿½nder)
 	headinclude=false,
 	titlepage=firstiscover,
 	abstract=true,
@@ -28,12 +28,12 @@
 	footsepline=true,
 	headings=normal
 	]{scrreprt}
-%Startet das Dokument und regelt gleichzeitig Formatierungen wie Schriftgröße, Papierformat, Zahlenart, Sprache usw.
-% 12pt - die Standardschriftgröße
-% openany - Kapitel dürfen auch auf der "Rückseite" starten, Leerseiten werden vermieden
-% parskip=full - Leerzeilen zwischen Absätzen statt Einrückung
-% twoside - Rückseiten werden mit bedruckt, Seitenzahlen und Binderände werden entsprechen angepasst
-% Alternative: oneside - einseitiges Layout, damit der linke Rand auf jeder Seite 3 cm beträgt
+%Startet das Dokument und regelt gleichzeitig Formatierungen wie Schriftgrï¿½ï¿½e, Papierformat, Zahlenart, Sprache usw.
+% 12pt - die Standardschriftgrï¿½ï¿½e
+% openany - Kapitel dï¿½rfen auch auf der "Rï¿½ckseite" starten, Leerseiten werden vermieden
+% parskip=full - Leerzeilen zwischen Absï¿½tzen statt Einrï¿½ckung
+% twoside - Rï¿½ckseiten werden mit bedruckt, Seitenzahlen und Binderï¿½nde werden entsprechen angepasst
+% Alternative: oneside - einseitiges Layout, damit der linke Rand auf jeder Seite 3 cm betrï¿½gt
 
 % \RedeclareSectionCommand[
 %   beforeskip=-32pt
@@ -49,25 +49,25 @@
 
 \begin{document}
 
-% Deckblatt erhält eine eigene (unsichtbare) Nummerierung, damit es nicht mit
+% Deckblatt erhï¿½lt eine eigene (unsichtbare) Nummerierung, damit es nicht mit
 % Seite 1 des Textteils kollidiert (doppelte PDF-Sprungmarke "page.1")
 \pagenumbering{Alph}
 \include{Kapitel/Titelseite}
 
 \preface
-%Ab hier Seitenzahlen mit Römischen Ziffern
+%Ab hier Seitenzahlen mit Rï¿½mischen Ziffern
 
 \listoftodos
 
-% Sperrvermerk NUR einkommentieren, wenn zwingend schützensnotwendige,
+% Sperrvermerk NUR einkommentieren, wenn zwingend schï¿½tzensnotwendige,
 % vertrauliche Informationen enthalten sind (siehe Kapitel/Sperrvermerk.tex)
 %\include{Kapitel/Sperrvermerk}
 
 % auskommentieren, um den Abstract/Kurzzusammenfassung wegzulassen
 \include{Kapitel/Abstract}
 
-% Reihenfolge der Verzeichnisse gemäß Anforderungen (Formatierung 2a):
-% Sperrvermerk, Inhalt, Abbildungen, Glossar, Tabellen, Abkürzungen, Symbole
+% Reihenfolge der Verzeichnisse gemï¿½ï¿½ Anforderungen (Formatierung 2a):
+% Sperrvermerk, Inhalt, Abbildungen, Glossar, Tabellen, Abkï¿½rzungen, Symbole
 
 \tableofcontents
 % erstellt das vollautomatische Inhaltsverzeichnis
@@ -79,12 +79,12 @@
 % erstellt das Tabellenverzeichnis (sofern notwendig)
 
 \glsaddall[types=main]
-% Befehl, um alle Glossar Einträge ohne sie im body aufzurufen, auszugeben
+% Befehl, um alle Glossar Eintrï¿½ge ohne sie im body aufzurufen, auszugeben
 \printglossary[title=Glossar, type=\glsdefaulttype]
 % erstellt das Glossar (sofern notwendig)
 
-\printglossary[type=\acronymtype, title=Abürzungsverzeichnis, nonumberlist]
-% erstellt das Abkürzungsverzeichnis (sofern notwendig)
+\printglossary[type=\acronymtype, title=Abï¿½rzungsverzeichnis, nonumberlist]
+% erstellt das Abkï¿½rzungsverzeichnis (sofern notwendig)
 
 % Symbolverzeichnis (sofern notwendig), z.B.:
 %\addchap{Symbolverzeichnis}
@@ -107,11 +107,13 @@
 \kapitel{Kapitel/05_Ergebnisse.tex}
 \kapitel{Kapitel/06_Fazit.tex}
 
-\pagenumbering{Roman}
-% Seiten nach dem Textteil mit großen römischen Zahlen (I, II, III ...)
+\clearpage
 
-% Reihenfolge gemäß Anforderungen (Formatierung 2b):
-% Literatur, KI-Verzeichnis, Rechtsquellen, Anhang, Selbstständigkeitserklärung
+\pagenumbering{Roman}
+% Seiten nach dem Textteil mit groï¿½en rï¿½mischen Zahlen (I, II, III ...)
+
+% Reihenfolge gemï¿½ï¿½ Anforderungen (Formatierung 2b):
+% Literatur, KI-Verzeichnis, Rechtsquellen, Anhang, Selbststï¿½ndigkeitserklï¿½rung
 
 \clearpage
 % Das Literaturverzeichnis beginnt immer auf einer neuen Seite - auch dann,
@@ -134,7 +136,7 @@
 %...
 
 \include{Kapitel/A2_Erklaerung}
-% Selbstständigkeitserklärung (verpflichtend)
+% Selbststï¿½ndigkeitserklï¿½rung (verpflichtend)
 
 \end{document}
 %beendet das Dokument
