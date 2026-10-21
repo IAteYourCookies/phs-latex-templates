@@ -97,12 +97,15 @@
 \body
 %ab hier Seitenzahlen in Arabischen Zahlen
 
-\include{Kapitel/01_Einleitung}
-\include{Kapitel/02_Stand.tex}
-\include{Kapitel/03_Methodik.tex}
-\include{Kapitel/04_Untersuchung.tex}
-\include{Kapitel/05_Ergebnisse.tex}
-\include{Kapitel/06_Fazit.tex}
+% Kapitel werden ueber \kapitel{...} eingebunden. Je nach Schalter
+% \kapitelneuseite beginnt jedes Kapitel auf einer neuen Seite oder die
+% Kapitel laufen fort (mehrere Kapitel auf derselben Seite).
+\kapitel{Kapitel/01_Einleitung}
+\kapitel{Kapitel/02_Stand.tex}
+\kapitel{Kapitel/03_Methodik.tex}
+\kapitel{Kapitel/04_Untersuchung.tex}
+\kapitel{Kapitel/05_Ergebnisse.tex}
+\kapitel{Kapitel/06_Fazit.tex}
 
 \pagenumbering{Roman}
 % Seiten nach dem Textteil mit großen römischen Zahlen (I, II, III ...)
@@ -110,8 +113,15 @@
 % Reihenfolge gemäß Anforderungen (Formatierung 2b):
 % Literatur, KI-Verzeichnis, Rechtsquellen, Anhang, Selbstständigkeitserklärung
 
+\clearpage
+% Das Literaturverzeichnis beginnt immer auf einer neuen Seite - auch dann,
+% wenn die Kapitel im Textteil fortlaufen (Schalter \kapitelneuseite).
+
 \printbibliography[title=Literaturverzeichnis]
 % erstellt das Literaturverzeichnis (verpflichtend)
+
+\clearpage
+% Auch das KI-Verzeichnis beginnt auf einer neuen Seite (siehe oben).
 
 \include{Kapitel/A1_KI}
 % KI-Verzeichnis (verpflichtend)

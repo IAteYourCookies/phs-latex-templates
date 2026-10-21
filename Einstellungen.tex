@@ -128,6 +128,9 @@
 
 \usepackage{enumitem}
 
+\usepackage{etoolbox}
+%Ermöglicht das Entfernen des Seitenumbruchs vor \chapter (siehe Abschnitt unten)
+
 \usepackage[hidelinks]{hyperref}
 % Generische Links
 
@@ -182,6 +185,62 @@
 
 \addtokomafont{chapterprefix}{\raggedleft}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KAPITEL: BEGINN AUF NEUER SEITE?
+% KOMA-Script beginnt jedes Kapitel auf einer neuen Seite (\clearpage, bei "openright" zusätzlich \cleardoublepage).
+%
+% Schalter:
+%   \kapitelneuseitefalse  Die Kapitel laufen fort: mehrere Kapitel koennen
+%                          auf derselben Seite stehen. Der Seitenumbruch vor
+%                          \chapter wird dazu entfernt - Nummerierung, Format
+%                          und Inhaltsverzeichnis der Kapitel bleiben
+%                          unveraendert.
+%   \kapitelneuseitetrue   Jedes Kapitel beginnt auf einer neuen Seite
+%
+% Die Kapitel werden in main.tex ueber \kapitel{...} eingebunden: im Standard
+% mit \include (eigene .aux-Datei je Kapitel, Seitenumbruch am Dateiende), im
+% Fliesstext mit \input (kein erzwungener Seitenumbruch am Dateiende).
+\newif\ifkapitelneuseite
+\kapitelneuseitetrue
+% \kapitelneuseitefalse
+
+\ifkapitelneuseite
+  % Standard: Jedes Kapitel beginnt auf einer neuen Seite - nichts zu tun.
+\else
+  % Fliesstext: Der Seitenumbruch vor \chapter wird entfernt.
+  \makeatletter
+
+  \patchcmd{\scr@startchapter}
+    {\if@openright\cleardoublepage\else\clearpage\fi}
+    {}
+    {\relax}
+    {%
+      \PackageError{WAB-Vorlage}{%
+        Der Seitenumbruch vor \string\chapter konnte nicht entfernt werden%
+      }{%
+        Die interne Definition von \string\scr@startchapter (KOMA-Script) hat%
+        sich geaendert. Bitte die Vorlage entsprechend anpassen.%
+      }%
+    }
+
+  \renewcommand*{\scr@chapter@beforeskip}{1.5\baselineskip}%
+
+  \providecommand*{\scr@chapter@afterindent}[3]{\@afterindentfalse}%
+
+  \renewcommand*{\chapterheadstartvskip}{\vspace{\@tempskipa}}%
+  \makeatother
+\fi
+
+% Kapitel-Dateien einbinden: \kapitel{Kapitel/1Einleitung}
+%   Fliesstext: \input (kein erzwungener Seitenumbruch am Dateiende, damit
+%               mehrere Kapitel auf derselben Seite stehen koennen)
+%   Standard:   \include (eigene .aux-Datei je Kapitel, Seitenumbruch am
+%               Dateiende, daher beginnt jedes Kapitel auf einer neuen Seite)
+\ifkapitelneuseite
+  \newcommand*{\kapitel}[1]{\include{#1}}
+\else
+  \newcommand*{\kapitel}[1]{\input{#1}}
+\fi
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PREFACE AND BODY STYLING
 \def\preface{
     \pagenumbering{roman}
@@ -189,7 +248,9 @@
 
 \def\body{
     %\cleardoublepage
-    \lesschapspace
+    \ifkapitelneuseite
+      \lesschapspace
+    \fi
     \pagenumbering{arabic}
     \pagestyle{headings}
 }
